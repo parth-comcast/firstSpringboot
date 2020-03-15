@@ -1,9 +1,6 @@
 package com.example.firstapp.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "sessions")
@@ -16,6 +13,11 @@ public class Session {
     private String session_description;
     private Integer session_length;
 
+    @ManyToMany
+    @JoinTable(
+            name = "session_speaker",
+            joinColumns = @JoinColumn(name = "session_id"),
+            inverseJoinColumns = @JoinColumn(name = "speaker_id"))
     private List<Speaker> speakers;
 
     public Session() {
